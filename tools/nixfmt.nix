@@ -11,6 +11,12 @@ in
 
     tools.nixfmt = {
       enable = mkEnableOption "nixfmt";
+
+      maxWidth = mkOption {
+        type = types.nullOr types.int;
+        default = null;
+        description = "Maximum width in characters.";
+      };
     };
 
   };
@@ -33,7 +39,10 @@ in
             fi
           done
 
-          ${pkgs.nixfmt}/bin/nixfmt ${optionalString checkOnly "--check"} "''${FILES[@]}"
+          ${pkgs.nixfmt}/bin/nixfmt \
+            ${optionalString checkOnly "--check"} \
+            ${optionalString (cfg.maxWidth != null) "--width ${toString cfg.maxWidth}"} \
+            "''${FILES[@]}"
         ''
       } ${files}";
 
