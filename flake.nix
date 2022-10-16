@@ -41,7 +41,13 @@
           })
       );
 
-      checks = forEachSystem (system: {
+      checks = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: {
+        nix-formatter-pack-check = self.lib.mkCheck {
+          inherit nixpkgs system;
+          config = optiniatedDefaultConfig;
+          checkFiles = [ ./. ];
+        };
+
         tests = import ./tests {
           inherit nixpkgs nmt system;
         };
@@ -54,6 +60,9 @@
         }
       );
 
-      lib.mkFormatter = args: (import ./. args).script;
+      lib = {
+        mkCheck = args: (import ./. args).check;
+        mkFormatter = args: (import ./. args).script;
+      };
     };
 }

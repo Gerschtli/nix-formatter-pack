@@ -3,6 +3,7 @@
 , pkgs ? nixpkgs.legacyPackages.${system}
 , config ? { }
 , extraModules ? [ ]
+, checkFiles ? [ ]
 }:
 
 assert pkgs != null;
@@ -20,10 +21,15 @@ let
   ++ extraModules;
 
   evaluatedModules = pkgs.lib.evalModules { inherit modules; };
+
+  check = pkgs.runCommand "nix-formatter-pack-check" { } ''
+    ${evaluatedModules.config.script}/bin/nix-formatter-pack --check ${pkgs.lib.concatStringsSep " " checkFiles}
+    touch ${placeholder "out"}
+  '';
 in
 
 {
   inherit (evaluatedModules.config) script;
   inherit (evaluatedModules) config options;
-  inherit modules;
+  inherit check modules;
 }

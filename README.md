@@ -58,7 +58,51 @@ usage in CI.
 
 For more information, see `nix fmt -- --help`.
 
+It can also be used as a [`nix flake check`][nix-flake-check-manual] like the following:
+
+```nix
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/release-22.05";
+    nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
+  };
+
+  outputs = { self, nixpkgs, nix-formatter-pack }: {
+
+    checks.x86_64-linux.nix-formatter-pack = nix-formatter-pack.lib.mkCheck {
+      inherit nixpkgs;
+      system = "x86_64-linux";
+      # or a custom instance of nixpkgs:
+      # pkgs = import nixpkgs { inherit system; };
+
+      # extensible with custom modules:
+      # extraModules = [ otherFlake.nixFormatterPackModules.default ];
+
+      config = {
+        # define custom formatters:
+        # formatters.customFormatter.commandFn =
+        #   { checkOnly, files, ... }:
+        #   ''
+        #     ${customFormatter}/bin/customFormatter ${if checkOnly then "--check" else "--fix"} ${files}
+        #   '';
+
+        tools = {
+          deadnix.enable = true;
+          nixpkgs-fmt.enable = true;
+          statix.enable = true;
+        };
+      };
+
+      # specify which files to check
+      checkFiles = [ ./. ];
+    };
+
+  };
+}
+```
+
 [deadnix]: https://github.com/astro/deadnix
+[nix-flake-check-manual]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake-check.html
 [nix-fmt-manual]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-fmt.html
 [nixfmt]: https://github.com/serokell/nixfmt
 [nixpkgs-fmt]: https://github.com/nix-community/nixpkgs-fmt
