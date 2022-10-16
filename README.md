@@ -6,6 +6,7 @@ formatting tools.
 Currently supported tools:
 
 - [deadnix][deadnix] (see [./tools/deadnix.nix](./tools/deadnix.nix) for options)
+- [nixfmt][nixfmt] (see [./tools/nixfmt.nix](./tools/nixfmt.nix) for options)
 - [nixpkgs-fmt][nixpkgs-fmt] (see [./tools/nixpkgs-fmt.nix](./tools/nixpkgs-fmt.nix) for options)
 - [statix][statix] (see [./tools/statix.nix](./tools/statix.nix) for options)
 
@@ -59,5 +60,6 @@ For more information, see `nix fmt -- --help`.
 
 [deadnix]: https://github.com/astro/deadnix
 [nix-fmt-manual]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-fmt.html
+[nixfmt]: https://github.com/serokell/nixfmt
 [nixpkgs-fmt]: https://github.com/nix-community/nixpkgs-fmt
 [statix]: https://github.com/nerdypepper/statix
