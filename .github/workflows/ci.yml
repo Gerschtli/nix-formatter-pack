@@ -1,0 +1,30 @@
+name: Build and test flake outputs
+on:
+  push:
+
+jobs:
+  nix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install nix
+        uses: cachix/install-nix-action@v18
+
+      - name: Run flake checks
+        run: |
+          nix \
+            --log-format bar-with-logs \
+            --option keep-going true \
+            --show-trace \
+            flake check
+
+      - name: Run nix fmt
+        run: |
+          nix \
+            --log-format bar-with-logs \
+            --option keep-going true \
+            --show-trace \
+            fmt
