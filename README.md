@@ -12,6 +12,10 @@ Currently supported tools:
 
 ## Usage
 
+**Hint**: To get started quickly, have a look at the provided nix templates in [./templates](./templates).
+
+### For `nix fmt`
+
 Set the special flake output `formatter` like the following:
 
 ```nix
@@ -57,6 +61,8 @@ reports if any tool found an issue and fails with a non-zero exit code if any is
 usage in CI.
 
 For more information, see `nix fmt -- --help`.
+
+### For `nix flake check`
 
 It can also be used as a [`nix flake check`][nix-flake-check-manual] like the following:
 

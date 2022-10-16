@@ -64,5 +64,19 @@
         mkCheck = args: (import ./. args).check;
         mkFormatter = args: (import ./. args).script;
       };
+
+      templates = {
+        default = self.templates.minimal;
+
+        minimal = {
+          path = ./templates/minimal;
+          description = "Minimal usage example of nix-formatter-pack.";
+        };
+
+        advanced = {
+          path = ./templates/advanced;
+          description = "Advanced usage example of nix-formatter-pack.";
+        };
+      };
     };
 }
