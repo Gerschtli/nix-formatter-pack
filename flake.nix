@@ -8,6 +8,7 @@
       forEachSystem = nixpkgs.lib.genAttrs [ "aarch64-darwin" "aarch64-linux" "i686-linux" "x86_64-darwin" "x86_64-linux" ];
       optiniatedDefaultConfig = {
         tools = {
+          deadnix.enable = true;
           nixpkgs-fmt.enable = true;
         };
       };
@@ -26,7 +27,7 @@
           };
         }
         // nixpkgs.lib.genAttrs
-          [ "nixpkgs-fmt" ]
+          [ "deadnix" "nixpkgs-fmt" ]
           (tool: mkFormatterApp {
             inherit nixpkgs system;
             config.tools.${tool}.enable = true;
