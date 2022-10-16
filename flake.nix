@@ -10,6 +10,7 @@
         tools = {
           deadnix.enable = true;
           nixpkgs-fmt.enable = true;
+          statix.enable = true;
         };
       };
 
@@ -27,7 +28,7 @@
           };
         }
         // nixpkgs.lib.genAttrs
-          [ "deadnix" "nixpkgs-fmt" ]
+          [ "deadnix" "nixpkgs-fmt" "statix" ]
           (tool: mkFormatterApp {
             inherit nixpkgs system;
             config.tools.${tool}.enable = true;
