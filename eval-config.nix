@@ -10,19 +10,23 @@ assert pkgs != null;
 let
   toolsModules = builtins.filter (pkgs.lib.hasSuffix ".nix") (pkgs.lib.filesystem.listFilesRecursive ./tools);
 
-  evaluatedModules = pkgs.lib.evalModules {
-    modules = [
-      {
-        _file = ./eval-config.nix;
-        _module.args = { inherit pkgs; };
-      }
-      ./module.nix
-      "${pkgs.path}/nixos/modules/misc/assertions.nix"
-      config
-    ]
-    ++ toolsModules
-    ++ extraModules;
-  };
+  modules = [
+    {
+      _file = ./eval-config.nix;
+      _module.args = { inherit pkgs; };
+    }
+    ./module.nix
+    "${pkgs.path}/nixos/modules/misc/assertions.nix"
+    config
+  ]
+  ++ toolsModules
+  ++ extraModules;
+
+  evaluatedModules = pkgs.lib.evalModules { inherit modules; };
 in
 
-evaluatedModules.config.script
+{
+  inherit (evaluatedModules.config) script;
+  inherit (evaluatedModules) config options;
+  inherit modules;
+}
