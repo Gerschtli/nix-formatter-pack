@@ -1,11 +1,15 @@
-_: {
-  configuration.tools.deadnix.enable = true;
+{ configuration, validFile, ... }:
+
+_:
+
+{
+  inherit configuration;
 
   toolTest = {
     enable = true;
     checkOnly = false;
     files."valid.nix" = {
-      source = ./files/valid.nix.raw;
+      source = validFile;
     };
     expectedExitCode = 0;
   };

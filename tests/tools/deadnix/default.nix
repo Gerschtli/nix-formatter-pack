@@ -1,7 +1,8 @@
-{
-  check-fails-for-invalid-file = ./check-fails-for-invalid-file.nix;
-  check-succeeds-for-valid-file = ./check-succeeds-for-valid-file.nix;
-  format-succeeds-for-invalid-file = ./format-succeeds-for-invalid-file.nix;
-  format-succeeds-for-valid-file = ./format-succeeds-for-valid-file.nix;
-  format-succeeds-with-all-options = ./format-succeeds-with-all-options.nix;
+(import ../default/lib.nix {
+  name = "deadnix";
+  configuration.tools.deadnix.enable = true;
+  validFile = ./files/valid.nix.raw;
+  invalidFile = ./files/invalid.nix.raw;
+}) // {
+  deadnix-format-succeeds-with-all-options = import ./format-succeeds-with-all-options.nix;
 }
