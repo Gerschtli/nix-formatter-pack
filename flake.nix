@@ -1,9 +1,15 @@
 {
   description = "Collection of several nix formatters.";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/release-22.05";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/release-22.05";
+    nmt = {
+      url = "gitlab:rycee/nmt";
+      flake = false;
+    };
+  };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, nmt }:
     let
       forEachSystem = nixpkgs.lib.genAttrs [ "aarch64-darwin" "aarch64-linux" "i686-linux" "x86_64-darwin" "x86_64-linux" ];
       optiniatedDefaultConfig = {
@@ -34,6 +40,12 @@
             config.tools.${tool}.enable = true;
           })
       );
+
+      checks = forEachSystem (system: {
+        tests = import ./tests {
+          inherit nixpkgs nmt system;
+        };
+      });
 
       formatter = forEachSystem (system:
         self.lib.mkFormatter {
