@@ -4,6 +4,16 @@ with lib;
 
 let
   cfg = config.tools.statix;
+
+  configFile = pkgs.writeTextFile {
+    name = "statix-config";
+    destination = "/statix.toml";
+    text = ''
+      disabled = [
+      ${concatMapStringsSep "\n" (l: "  \"${l}\",") cfg.disabledLints}
+      ]
+    '';
+  };
 in
 
 {
@@ -11,6 +21,24 @@ in
 
     tools.statix = {
       enable = mkEnableOption "statix";
+
+      disabledLints = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        description = ''
+          Disabled lints, see <https://github.com/nerdypepper/statix#configuration>
+          for list of all available lints.
+
+          **Note**: When this option is used, no other config file will be read by
+          statix.
+        '';
+      };
+
+      unrestricted = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Don't respect `.gitignore` files.";
+      };
     };
 
   };
@@ -19,9 +47,13 @@ in
 
     formatters.statix.commandFn =
       { checkOnly, files, ... }:
-      ''
-        ${pkgs.statix}/bin/statix ${if checkOnly then "check" else "fix"} ${files}
-      '';
+      concatStringsSep " " [
+        "${pkgs.statix}/bin/statix"
+        (if checkOnly then "check" else "fix")
+        (optionalString (cfg.disabledLints != [ ]) "--config ${configFile}")
+        (optionalString cfg.unrestricted "--unrestricted")
+        files
+      ];
 
   };
 }
