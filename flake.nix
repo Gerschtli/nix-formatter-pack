@@ -42,6 +42,6 @@
         }
       );
 
-      lib.mkFormatter = args: (import ./eval-config.nix args).script;
+      lib.mkFormatter = args: (import ./. args).script;
     };
 }

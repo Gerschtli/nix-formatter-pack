@@ -11,10 +11,7 @@ let
   toolsModules = builtins.filter (pkgs.lib.hasSuffix ".nix") (pkgs.lib.filesystem.listFilesRecursive ./tools);
 
   modules = [
-    {
-      _file = ./eval-config.nix;
-      _module.args = { inherit pkgs; };
-    }
+    { _module.args = { inherit pkgs; }; }
     ./module.nix
     "${pkgs.path}/nixos/modules/misc/assertions.nix"
     config
