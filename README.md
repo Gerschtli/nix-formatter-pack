@@ -111,6 +111,7 @@ It can also be used as a [`nix flake check`][nix-flake-check-manual] like the fo
 
 - [ ] Add more tools (see <https://discourse.nixos.org/t/list-of-nix-linters/19279>)
 - [ ] Add test for non-trivial file list resolution of `nixfmt`
+- [ ] Add rendered overview for all available options.
 
 [deadnix]: https://github.com/astro/deadnix
 [nix-flake-check-manual]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake-check.html
