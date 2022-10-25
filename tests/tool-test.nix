@@ -36,7 +36,9 @@ in
               expected = mkOption {
                 type = types.path;
                 default = config.source;
-                description = "Expected file. Defaults to `source` to ensure that the file did not change.";
+                description = ''
+                  Expected file. Defaults to <option>source</option> to ensure that the file did not change.
+                '';
               };
             };
           }
@@ -49,17 +51,19 @@ in
         default = map (f: f.name) (attrValues cfg.files);
         defaultText = literalExpression ''map (f: f.name) (attrValues config.toolTest.files)'';
         description = ''
-          List of file paths to call `nix-formatter-pack` with. Defaults to all files listed in
-          `toolTest.files` option.
+          List of file paths to call nix-formatter-pack with. Defaults to all files listed in
+          <option>toolTest.files</option> option.
 
-          Note: Each value is prefixed with `$out/files`, the same directory where all files from
-          `toolTest.files` are copied to.
+          </para><para>
+
+          <emphasis>Note</emphasis>: Each value is prefixed with <filename>$out/files</filename>,
+          the same directory where all files from <option>toolTest.files</option> are copied to.
         '';
       };
 
       expectedExitCode = mkOption {
         type = types.int;
-        description = "Expected exit code of `nix-formatter-pack`.";
+        description = "Expected exit code of nix-formatter-pack.";
       };
     };
 

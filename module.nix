@@ -146,15 +146,15 @@ in
                 '''
               '';
               description = ''
-                Command for formatter. Receives at least `checkOnly` as boolean
-                and `files` as a string.
+                Command for formatter. Receives at least <varname>checkOnly</varname> as boolean
+                and <varname>files</varname> as a string.
 
-                Must return a non-zero exit code when checkOnly is true and the
-                check fails. Should return zero exit code when checkOnly is false
+                Must return a non-zero exit code when <varname>checkOnly</varname> is true and the
+                check fails. Should return zero exit code when <varname>checkOnly</varname> is false
                 and all issues could be fixed.
 
-                For more complex commands, use `pkgs.writeScript` like
-                ```nix
+                For more complex commands, use <varname>pkgs.writeScript</varname> like
+                <programlisting language="nix">
                 { checkOnly, files, ... }:
                 "''${pkgs.writeScript
                   "nixpkgs-fmt"
@@ -162,7 +162,7 @@ in
                     ''${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt ''${lib.optionalString checkOnly "--check"} "$@"
                   '''
                 } ''${files}";
-                ```
+                </programlisting>
               '';
             };
           };

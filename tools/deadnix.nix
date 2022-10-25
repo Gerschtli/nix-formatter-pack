@@ -15,7 +15,7 @@ in
       checkHiddenFiles = mkOption {
         type = types.bool;
         default = false;
-        description = "Recurse into hidden subdirectories and process hidden `.*.nix` files.";
+        description = "Recurse into hidden subdirectories and process hidden <filename>.*.nix</filename> files.";
       };
 
       noLambdaArg = mkOption {
@@ -27,13 +27,13 @@ in
       noLambdaPatternNames = mkOption {
         type = types.bool;
         default = false;
-        description = "Don't check lambda attrset pattern names (don't break nixpkgs callPackage).";
+        description = "Don't check lambda attrset pattern names (don't break nixpkgs' <varname>callPackage</varname>).";
       };
 
       noUnderscore = mkOption {
         type = types.bool;
         default = false;
-        description = "Don't check any bindings that start with a `_`.";
+        description = "Don't check any bindings that start with a <literal>_</literal>.";
       };
     };
 

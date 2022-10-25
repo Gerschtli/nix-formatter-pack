@@ -26,18 +26,21 @@ in
         type = types.listOf types.str;
         default = [ ];
         description = ''
-          Disabled lints, see <https://github.com/nerdypepper/statix#configuration>
+          Disabled lints, see
+          <link xlink:href="https://github.com/nerdypepper/statix#configuration">offical statix docs</link>
           for list of all available lints.
 
-          **Note**: When this option is used, no other config file will be read by
-          statix.
+          </para><para>
+
+          <emphasis>Note</emphasis>: When this option is used, no other config file will be
+          read by statix.
         '';
       };
 
       unrestricted = mkOption {
         type = types.bool;
         default = false;
-        description = "Don't respect `.gitignore` files.";
+        description = "Don't respect <filename>.gitignore</filename> files.";
       };
     };
 
