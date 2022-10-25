@@ -38,7 +38,7 @@
           };
         }
         // nixpkgs.lib.genAttrs
-          [ "deadnix" "nixfmt" "nixpkgs-fmt" "statix" ]
+          [ "alejandra" "deadnix" "nixfmt" "nixpkgs-fmt" "statix" ]
           (tool: mkFormatterApp {
             inherit nixpkgs system;
             config.tools.${tool}.enable = true;

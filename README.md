@@ -5,6 +5,7 @@ formatting tools.
 
 Currently supported tools:
 
+- [alejandra][alejandra]
 - [deadnix][deadnix]
 - [nixfmt][nixfmt]
 - [nixpkgs-fmt][nixpkgs-fmt]
@@ -114,6 +115,7 @@ It can also be used as a [`nix flake check`][nix-flake-check-manual] like the fo
 - [ ] Add more tools (see <https://discourse.nixos.org/t/list-of-nix-linters/19279>)
 
 [manual]: https://gerschtli.github.io/nix-formatter-pack/
+[alejandra]: https://github.com/kamadorueda/alejandra
 [deadnix]: https://github.com/astro/deadnix
 [nix-flake-check-manual]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake-check.html
 [nix-fmt-manual]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-fmt.html
