@@ -3,8 +3,18 @@ on:
   push:
 
 jobs:
-  nix:
+  build:
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        nix-command:
+          - build .#manPages
+          - build .#manualHtml
+          - build .#optionsJson
+          - flake check
+          - fmt
 
     steps:
       - name: Checkout repository
@@ -13,18 +23,10 @@ jobs:
       - name: Install nix
         uses: cachix/install-nix-action@v18
 
-      - name: Run flake checks
+      - name: Run ${{ matrix.nix-command }}
         run: |
           nix \
-            --log-format bar-with-logs \
+            --print-build-logs \
             --option keep-going true \
             --show-trace \
-            flake check
-
-      - name: Run nix fmt
-        run: |
-          nix \
-            --log-format bar-with-logs \
-            --option keep-going true \
-            --show-trace \
-            fmt
+            ${{ matrix.nix-command }}
