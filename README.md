@@ -110,10 +110,6 @@ It can also be used as a [`nix flake check`][nix-flake-check-manual] like the fo
 }
 ```
 
-## TODOs
-
-- [ ] Add more tools (see <https://discourse.nixos.org/t/list-of-nix-linters/19279>)
-
 [manual]: https://gerschtli.github.io/nix-formatter-pack/
 [alejandra]: https://github.com/kamadorueda/alejandra
 [deadnix]: https://github.com/astro/deadnix
