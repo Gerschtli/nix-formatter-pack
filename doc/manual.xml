@@ -1,0 +1,67 @@
+<book xmlns="http://docbook.org/ns/docbook"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      version="5.0"
+      xml:id="book-manual">
+ <info>
+  <title>Nix formatter pack manual</title>
+ </info>
+ <preface>
+  <title>Preface</title>
+  <para>
+   Some basic documentation of Nix formatter pack.
+  </para>
+  <para>
+   If you encounter problems or bugs then please report them on the
+   <link xlink:href="https://github.com/Gerschtli/nix-formatter-pack/issues">issue tracker</link>.
+  </para>
+ </preface>
+
+ <appendix xml:id="ch-options">
+  <title>Nix formatter pack configuration options</title>
+  <section xml:id="sec-usage">
+   <title>Usage</title>
+
+   <para>
+    To use these options, set the <replaceable>config</replaceable> argument in the call
+    to <varname>mkCheck</varname> or <varname>mkFormatter</varname> in your
+    <filename>flake.nix</filename> like that:
+<programlisting language="nix">
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/release-22.05";
+    nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
+  };
+
+  outputs = { self, nixpkgs, nix-formatter-pack }: {
+
+    formatter.x86_64-linux = nix-formatter-pack.lib.mkFormatter {
+      inherit nixpkgs;
+      system = "x86_64-linux";
+      # or a custom instance of nixpkgs:
+      # pkgs = import nixpkgs { inherit system; };
+
+      # extensible with custom modules:
+      # extraModules = [ otherFlake.nixFormatterPackModules.default ];
+
+      <replaceable>config</replaceable> = {
+        tools = {
+          deadnix.enable = true;
+          nixpkgs-fmt.enable = true;
+          statix.enable = true;
+        };
+      };
+    };
+
+  };
+}
+</programlisting>
+   </para>
+  </section>
+  <section xml:id="sec-options">
+   <title>Options</title>
+
+   <xi:include href="./nmd-result/nix-formatter-pack-options.xml" />
+  </section>
+ </appendix>
+</book>

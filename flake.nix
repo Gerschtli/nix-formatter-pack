@@ -3,13 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-22.05";
+    nmd = {
+      url = "gitlab:rycee/nmd";
+      flake = false;
+    };
     nmt = {
       url = "gitlab:rycee/nmt";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, nmt }:
+  outputs = { self, nixpkgs, nmd, nmt }:
     let
       forEachSystem = nixpkgs.lib.genAttrs [ "aarch64-darwin" "aarch64-linux" "i686-linux" "x86_64-darwin" "x86_64-linux" ];
       optiniatedDefaultConfig = {
@@ -64,6 +68,17 @@
         mkCheck = args: (import ./. args).check;
         mkFormatter = args: (import ./. args).script;
       };
+
+      packages = forEachSystem
+        (system: import ./doc {
+          formatter = import ./. {
+            inherit nixpkgs system;
+          };
+
+          pkgs = nixpkgs.legacyPackages.${system};
+
+          nmdSrc = nmd;
+        });
 
       templates = {
         default = self.templates.minimal;

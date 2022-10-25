@@ -1,0 +1,36 @@
+<reference xmlns="http://docbook.org/ns/docbook"
+           xmlns:xlink="http://www.w3.org/1999/xlink"
+           xmlns:xi="http://www.w3.org/2001/XInclude">
+ <title>Nix formatter pack Reference Pages</title>
+ <info>
+  <author><personname>Tobias Happ</personname>
+  </author>
+  <copyright><year>2022</year><holder>Tobias Happ</holder>
+  </copyright>
+ </info>
+ <refentry>
+  <refmeta>
+   <refentrytitle><filename>nix-formatter-pack-options</filename></refentrytitle>
+   <manvolnum>5</manvolnum>
+   <refmiscinfo class="source">Nix formatter pack</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+   <refname><filename>nix-formatter-pack-options</filename>
+   </refname><refpurpose>Nix formatter pack configuration specification</refpurpose>
+  </refnamediv>
+  <refsection>
+   <title>Description</title>
+   <para>
+    This contains the module options available for Nix formatter pack.
+   </para>
+  </refsection>
+  <refsection>
+   <title>Options</title>
+   <para>
+    You can use the following options as arg <varname>config</varname> when calling
+    <varname>mkCheck</varname> or <varname>mkFormatter</varname>:
+   </para>
+   <xi:include href="./nmd-result/nix-formatter-pack-options.xml" />
+  </refsection>
+ </refentry>
+</reference>
