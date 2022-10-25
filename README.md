@@ -5,10 +5,12 @@ formatting tools.
 
 Currently supported tools:
 
-- [deadnix][deadnix] (see [./tools/deadnix.nix](./tools/deadnix.nix) for options)
-- [nixfmt][nixfmt] (see [./tools/nixfmt.nix](./tools/nixfmt.nix) for options)
-- [nixpkgs-fmt][nixpkgs-fmt] (see [./tools/nixpkgs-fmt.nix](./tools/nixpkgs-fmt.nix) for options)
-- [statix][statix] (see [./tools/statix.nix](./tools/statix.nix) for options)
+- [deadnix][deadnix]
+- [nixfmt][nixfmt]
+- [nixpkgs-fmt][nixpkgs-fmt]
+- [statix][statix]
+
+For the list of available options, see the [manual][manual].
 
 ## Usage
 
@@ -110,8 +112,8 @@ It can also be used as a [`nix flake check`][nix-flake-check-manual] like the fo
 ## TODOs
 
 - [ ] Add more tools (see <https://discourse.nixos.org/t/list-of-nix-linters/19279>)
-- [ ] Add rendered overview for all available options.
 
+[manual]: https://gerschtli.github.io/nix-formatter-pack/
 [deadnix]: https://github.com/astro/deadnix
 [nix-flake-check-manual]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake-check.html
 [nix-fmt-manual]: https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-fmt.html
