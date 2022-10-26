@@ -70,7 +70,7 @@
       };
 
       packages = forEachSystem
-        (system: import ./doc {
+        (system: import ./docs {
           formatter = import ./. {
             inherit nixpkgs system;
           };
