@@ -2,7 +2,7 @@
   description = "Collection of several nix formatters.";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-22.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
     nmd = {
       url = "gitlab:rycee/nmd";
       flake = false;
@@ -18,7 +18,10 @@
       forEachSystem = nixpkgs.lib.genAttrs [ "aarch64-darwin" "aarch64-linux" "i686-linux" "x86_64-darwin" "x86_64-linux" ];
       optiniatedDefaultConfig = {
         tools = {
-          deadnix.enable = true;
+          deadnix = {
+            enable = true;
+            noLambdaPatternNames = true;
+          };
           nixpkgs-fmt.enable = true;
           statix.enable = true;
         };
