@@ -21,12 +21,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install nix
-        uses: cachix/install-nix-action@v18
+        uses: cachix/install-nix-action@v19
         with:
           extra_nix_config: |
             keep-going = true
             show-trace = true
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
       - name: Run ${{ matrix.nix-command }}
         run: nix ${{ matrix.nix-command }}
